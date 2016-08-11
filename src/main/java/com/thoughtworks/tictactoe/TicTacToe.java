@@ -28,7 +28,12 @@ public class TicTacToe {
 
     private void executePlayerMove() {
         promptPlayer();
-        String move = readLine();
+        int move = readNumber();
+        while (gameBoard.isPositionTaken(move)) {
+            printStream.println("Location already taken.");
+            promptPlayer();
+            move = readNumber();
+        }
         gameBoard.makeMove(move, currentPlayer);
         gameBoard.display();
     }
@@ -37,13 +42,15 @@ public class TicTacToe {
         printStream.println("Player " + currentPlayer + ": Enter a number to place your mark.");
     }
 
-    private String readLine() {
+    private int readNumber() {
         try {
-            return reader.readLine();
+            return Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             printStream.println("I/O Error. Could not read input.");
+        } catch (NumberFormatException e) {
+            printStream.println("Input was not an integer.");
         }
-        return null;
+        return -1;
     }
 
     private void switchCurrentPlayer() {

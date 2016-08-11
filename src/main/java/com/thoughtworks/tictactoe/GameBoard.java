@@ -21,8 +21,19 @@ public class GameBoard {
                                           "%s|%s|%s", board.toArray()));
     }
 
-    public void makeMove(String boardPosition, String playerSymbol) {
-        int index = Integer.parseInt(boardPosition) - 1;
-        board.set(index, playerSymbol);
+    public void makeMove(int boardPosition, String playerSymbol) {
+        board.set(getIndexFromBoardPosition(boardPosition), playerSymbol);
+    }
+
+    public boolean isPositionTaken(int boardPosition) {
+        int index = getIndexFromBoardPosition(boardPosition);
+        if (board.get(index).equals("X") || board.get(index).equals("O")) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getIndexFromBoardPosition(int move) {
+        return move - 1;
     }
 }

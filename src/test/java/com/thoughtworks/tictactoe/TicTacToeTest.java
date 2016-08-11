@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
@@ -30,7 +31,8 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void shouldPromptFirstPlayerToEnterANumberAfterBoardDisplays() {
+    public void shouldPromptFirstPlayerToEnterANumberAfterBoardDisplays() throws IOException {
+        when(reader.readLine()).thenReturn("1");
         ticTacToe.startGame();
         verify(printStream).println("Player X: Enter a number to place your mark.");
     }
@@ -39,11 +41,12 @@ public class TicTacToeTest {
     public void shouldMakeMoveWithXWhenFirstPlayerEntersOne() throws Exception {
         when(reader.readLine()).thenReturn("1");
         ticTacToe.startGame();
-        verify(gameBoard).makeMove("1", "X");
+        verify(gameBoard).makeMove(1, "X");
     }
 
     @Test
-    public void shouldPromptSecondPlayerToEnterANumberAfterFirstPlayerMoves() {
+    public void shouldPromptSecondPlayerToEnterANumberAfterFirstPlayerMoves() throws IOException {
+        when(reader.readLine()).thenReturn("1", "2");
         ticTacToe.startGame();
         verify(printStream).println("Player O: Enter a number to place your mark.");
     }
@@ -52,6 +55,29 @@ public class TicTacToeTest {
     public void shouldMakeMoveWithOWhenSecondPlayerEntersTwo() throws Exception {
         when(reader.readLine()).thenReturn("1", "2");
         ticTacToe.startGame();
-        verify(gameBoard).makeMove("2", "O");
+        verify(gameBoard).makeMove(2, "O");
     }
+
+    @Test
+    public void shouldMakeMoveWhenLocationIsOpen() throws IOException {
+        when(reader.readLine()).thenReturn("1");
+        when(gameBoard.isPositionTaken(anyInt())).thenReturn(false);
+        ticTacToe.startGame();
+        verify(gameBoard).makeMove(1, "X");
+    }
+
+    @Test
+    public void shouldAskForAnotherMoveWhenLocationIsTaken() throws IOException {
+        when(reader.readLine()).thenReturn("1", "1", "2");
+        when(gameBoard.isPositionTaken(anyInt())).thenReturn(false, true, false);
+        ticTacToe.startGame();
+        verify(gameBoard).makeMove(1, "X");
+        verify(gameBoard).makeMove(2, "O");
+    }
+
+
+//    @Test
+//    public void shouldPromptPlayerToTryAgainUntilMoveIsValid() {
+//
+//    }
 }
