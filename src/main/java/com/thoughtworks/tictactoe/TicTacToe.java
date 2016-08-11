@@ -6,8 +6,8 @@ import java.io.PrintStream;
 
 public class TicTacToe {
 
-    private final GameBoard gameBoard;
-    private final PrintStream printStream;
+    private GameBoard gameBoard;
+    private PrintStream printStream;
     private BufferedReader reader;
 
     public TicTacToe(GameBoard gameBoard, PrintStream printStream, BufferedReader reader) {
@@ -24,7 +24,7 @@ public class TicTacToe {
     private void executePlayerMove() {
         promptPlayer();
         String move = readLine();
-        gameBoard.makeMove(move);
+        gameBoard.makeMove(move, "X");
     }
 
     private void promptPlayer() {

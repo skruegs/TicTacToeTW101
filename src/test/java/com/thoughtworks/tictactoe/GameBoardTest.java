@@ -28,10 +28,20 @@ public class GameBoardTest {
     }
 
     @Test
-    public void shouldDisplayBoardWithXInOneSpotWhenMoveIsOne() throws Exception {
-        gameBoard.makeMove("1");
+    public void shouldDisplayBoardWithXInOneSpotWhenFirstMoveIsOne() throws Exception {
+        gameBoard.makeMove("1", "X");
         verify(printStream).println("X|2|3");
         verify(printStream).println("4|5|6");
         verify(printStream).println("7|8|9");
     }
+
+    @Test
+    public void shouldDisplayBoardWithXInTwoSpotWhenFirstMoveIsTwo() throws Exception {
+        gameBoard.makeMove("2", "X");
+        verify(printStream).println("1|X|3");
+        verify(printStream).println("4|5|6");
+        verify(printStream).println("7|8|9");
+    }
+
+
 }

@@ -4,25 +4,32 @@ import java.io.PrintStream;
 
 public class GameBoard {
 
-    private final PrintStream printStream;
+    private PrintStream printStream;
+    private String[] board;
 
     public GameBoard(PrintStream printStream) {
         this.printStream = printStream;
+        initializeEmptyBoard();
+    }
+
+    private void initializeEmptyBoard() {
+        board = new String[9];
+        for (int i = 0; i <= 8; i++) {
+            board[i] = Integer.toString(i + 1);
+        }
     }
 
     public void display() {
-        printStream.println("1|2|3");
+        printStream.println(board[0] + "|" + board[1] + "|" + board[2]);
         printStream.println("-----");
-        printStream.println("4|5|6");
+        printStream.println(board[3] + "|" + board[4] + "|" + board[5]);
         printStream.println("-----");
-        printStream.println("7|8|9");
+        printStream.println(board[6] + "|" + board[7] + "|" + board[8]);
     }
 
-    public void makeMove(String move) {
-        printStream.println("X|2|3");
-        printStream.println("-----");
-        printStream.println("4|5|6");
-        printStream.println("-----");
-        printStream.println("7|8|9");
+    public void makeMove(String boardPosition, String playerSymbol) {
+        int index = Integer.parseInt(boardPosition) - 1;
+        board[index] = playerSymbol;
+        display();
     }
 }

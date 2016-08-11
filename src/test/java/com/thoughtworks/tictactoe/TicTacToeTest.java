@@ -38,10 +38,10 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void shouldMakeMoveWhenPlayerEntersOne() throws Exception {
+    public void shouldMakeMoveWithXWhenFirstPlayerEntersOne() throws Exception {
         when(reader.readLine()).thenReturn("1");
         ticTacToe.startGame();
-        verify(gameBoard).makeMove("1");
+        verify(gameBoard).makeMove("1", "X");
     }
 
 }
