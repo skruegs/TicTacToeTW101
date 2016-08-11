@@ -32,9 +32,9 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void shouldPromptPlayerToEnterANumberAfterBoardDisplays() {
+    public void shouldPromptFirstPlayerToEnterANumberAfterBoardDisplays() {
         ticTacToe.startGame();
-        verify(printStream).println("Enter a number to place your mark:");
+        verify(printStream).println("Player X: Enter a number to place your mark.");
     }
 
     @Test
@@ -44,4 +44,16 @@ public class TicTacToeTest {
         verify(gameBoard).makeMove("1", "X");
     }
 
+    @Test
+    public void shouldPromptSecondPlayerToEnterANumberAfterFirstPlayerMoves() {
+        ticTacToe.startGame();
+        verify(printStream).println("Player O: Enter a number to place your mark.");
+    }
+
+    @Test
+    public void shouldMakeMoveWithOWhenSecondPlayerEntersTwo() throws Exception {
+        when(reader.readLine()).thenReturn("1", "2");
+        ticTacToe.startGame();
+        verify(gameBoard).makeMove("2", "O");
+    }
 }
