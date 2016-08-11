@@ -24,6 +24,5 @@ public class GameBoard {
     public void makeMove(String boardPosition, String playerSymbol) {
         int index = Integer.parseInt(boardPosition) - 1;
         board.set(index, playerSymbol);
-        display();
     }
 }

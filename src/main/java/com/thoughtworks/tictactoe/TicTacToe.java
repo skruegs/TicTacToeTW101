@@ -20,18 +20,17 @@ public class TicTacToe {
 
     public void startGame() {
         gameBoard.display();
+
+        executePlayerMove();
+        switchCurrentPlayer();
         executePlayerMove();
     }
 
     private void executePlayerMove() {
         promptPlayer();
         String move = readLine();
-        gameBoard.makeMove(move, "X");
-
-        switchCurrentPlayer();
-        promptPlayer();
-        move = readLine();
-        gameBoard.makeMove(move, "O");
+        gameBoard.makeMove(move, currentPlayer);
+        gameBoard.display();
     }
 
     private void promptPlayer() {

@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -34,24 +36,15 @@ public class GameBoardTest {
     }
 
     @Test
-    public void shouldDisplayBoardWithXInOneSpotWhenFirstMoveIsOne() throws Exception {
+    public void shouldHaveXInSpotOneWhenFirstMoveIsOne() throws Exception {
         gameBoard.makeMove("1", "X");
-        verify(printStream).println("X|2|3\n" +
-                                    "-----\n" +
-                                    "4|5|6\n" +
-                                    "-----\n" +
-                                    "7|8|9");
+        assertThat(board.get(0), is("X"));
     }
 
     @Test
-    public void shouldDisplayBoardWithXInTwoSpotWhenFirstMoveIsTwo() throws Exception {
+    public void shouldHaveXInSpotTwoWhenFirstMoveIsTwo() throws Exception {
         gameBoard.makeMove("2", "X");
-        verify(printStream).println("1|X|3\n" +
-                                    "-----\n" +
-                                    "4|5|6\n" +
-                                    "-----\n" +
-                                    "7|8|9");
-        //assertThat(board.get(4), is("X"));
+        assertThat(board.get(1), is("X"));
     }
 
 

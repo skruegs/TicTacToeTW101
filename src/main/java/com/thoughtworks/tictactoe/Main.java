@@ -25,5 +25,4 @@ public class Main {
         return new GameBoard(printStream, board);
     }
 
-
 }

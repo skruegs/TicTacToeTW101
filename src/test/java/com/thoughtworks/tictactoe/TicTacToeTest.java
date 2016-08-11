@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class TicTacToeTest {
 
@@ -28,7 +26,7 @@ public class TicTacToeTest {
     @Test
     public void shouldDisplayBoardWhenGameStarts() {
         ticTacToe.startGame();
-        verify(gameBoard).display();
+        verify(gameBoard, times(3)).display();
     }
 
     @Test
