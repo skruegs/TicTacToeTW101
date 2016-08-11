@@ -59,4 +59,16 @@ public class GameBoardTest {
         board.set(0, "X");
         assertTrue(gameBoard.isPositionTaken(1));
     }
+
+    @Test
+    public void isFullMethodShouldReturnFalseWhenBoardIsNotFull() {
+        assertFalse(gameBoard.isFull());
+    }
+
+    @Test
+    public void isFullMethodShouldReturnTrueWhenBoardIsFull() {
+        board = Arrays.asList("X", "X", "X", "X", "X", "O", "O", "O", "O");
+        gameBoard = new GameBoard(printStream, board);
+        assertTrue(gameBoard.isFull());
+    }
 }

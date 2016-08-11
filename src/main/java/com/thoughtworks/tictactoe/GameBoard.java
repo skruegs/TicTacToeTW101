@@ -33,6 +33,15 @@ public class GameBoard {
         return false;
     }
 
+    public boolean isFull() {
+        for (String value : board) {
+            if (!(value.equals("X") || value.equals("O"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private int getIndexFromBoardPosition(int move) {
         return move - 1;
     }

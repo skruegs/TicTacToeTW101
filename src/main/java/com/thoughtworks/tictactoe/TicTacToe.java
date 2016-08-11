@@ -21,9 +21,12 @@ public class TicTacToe {
     public void startGame() {
         gameBoard.display();
 
-        executePlayerMove();
-        switchCurrentPlayer();
-        executePlayerMove();
+        while(!gameBoard.isFull()) {
+            executePlayerMove();
+            switchCurrentPlayer();
+        }
+
+        printStream.print("Game is a draw.");
     }
 
     private void executePlayerMove() {
