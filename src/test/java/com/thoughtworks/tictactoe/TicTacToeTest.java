@@ -15,13 +15,17 @@ public class TicTacToeTest {
     private PrintStream printStream;
     private BufferedReader reader;
     private TicTacToe ticTacToe;
+    private Player player1;
+    private Player player2;
 
     @Before
     public void setUp() {
         gameBoard = mock(GameBoard.class);
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        ticTacToe = new TicTacToe(gameBoard, printStream, reader);
+        player1 = mock(Player.class);
+        player2 = mock(Player.class);
+        ticTacToe = new TicTacToe(gameBoard, printStream, player1, player2);
     }
 
     @Test
@@ -32,60 +36,17 @@ public class TicTacToeTest {
     }
 
     @Test
-    public void shouldPromptFirstPlayerToEnterANumberAfterBoardDisplays() throws IOException {
-        when(reader.readLine()).thenReturn("1");
+    public void shouldDisplayBoardTwiceWhenGameStartsAndPlayerOneMakesMove() {
         when(gameBoard.isFull()).thenReturn(false, true);
         ticTacToe.startGame();
-        verify(printStream).println("Player X: Enter a number to place your mark.");
+        verify(gameBoard, times(2)).display();
     }
 
     @Test
-    public void shouldMakeMoveWithXWhenFirstPlayerEntersOne() throws Exception {
-        when(reader.readLine()).thenReturn("1");
-        when(gameBoard.isFull()).thenReturn(false, true);
-        ticTacToe.startGame();
-        verify(gameBoard).makeMove(1, "X");
-    }
-
-    @Test
-    public void shouldPromptSecondPlayerToEnterANumberAfterFirstPlayerMoves() throws IOException {
-        when(reader.readLine()).thenReturn("1", "2");
+    public void shouldHaveSecondPlayerMoveAfterFirstPlayerMoves() throws IOException {
         when(gameBoard.isFull()).thenReturn(false, false, true);
         ticTacToe.startGame();
-        verify(printStream).println("Player O: Enter a number to place your mark.");
+        verify(player2).executeMove();
     }
 
-    @Test
-    public void shouldMakeMoveWithOWhenSecondPlayerEntersTwo() throws Exception {
-        when(reader.readLine()).thenReturn("1", "2");
-        when(gameBoard.isFull()).thenReturn(false, false, true);
-        ticTacToe.startGame();
-        verify(gameBoard).makeMove(2, "O");
-    }
-
-    @Test
-    public void shouldMakeMoveWhenLocationIsOpen() throws IOException {
-        when(reader.readLine()).thenReturn("1");
-        when(gameBoard.isPositionTaken(anyInt())).thenReturn(false);
-        when(gameBoard.isFull()).thenReturn(false, true);
-        ticTacToe.startGame();
-        verify(gameBoard).makeMove(1, "X");
-    }
-
-    @Test
-    public void shouldAskForAnotherMoveWhenLocationIsTaken() throws IOException {
-        when(reader.readLine()).thenReturn("1", "1", "2");
-        when(gameBoard.isPositionTaken(anyInt())).thenReturn(false, true, false);
-        when(gameBoard.isFull()).thenReturn(false, false, false, true);
-        ticTacToe.startGame();
-        verify(gameBoard).makeMove(1, "X");
-        verify(gameBoard).makeMove(2, "O");
-    }
-
-    @Test
-    public void shouldLoopUntilBoardIsFull() throws Exception {
-        // all the other tests already have to test this... definitely doing something wrong.
-        // need to figure out how to separate logic in this class into another one
-        // so that I don't have all my tests just running ticTacToe.startGame();
-    }
 }

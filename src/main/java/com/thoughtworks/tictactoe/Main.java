@@ -14,10 +14,12 @@ public class Main {
     }
 
     private static TicTacToe initializeTicTacToe() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         PrintStream printStream = System.out;
         GameBoard gameBoard = initializeGameBoard(printStream);
-        return new TicTacToe(gameBoard, printStream, reader);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Player player1 = new Player(printStream, reader,  gameBoard, "1", "X");
+        Player player2 = new Player(printStream, reader, gameBoard, "2", "O");
+        return new TicTacToe(gameBoard, printStream, player1, player2);
     }
 
     private static GameBoard initializeGameBoard(PrintStream printStream) {

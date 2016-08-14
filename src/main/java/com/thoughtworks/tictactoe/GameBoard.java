@@ -14,14 +14,18 @@ public class GameBoard {
     }
 
     public void display() {
-        printStream.println(String.format("%s|%s|%s" +
-                                          "\n-----\n" +
-                                          "%s|%s|%s" +
-                                          "\n-----\n" +
-                                          "%s|%s|%s", board.toArray()));
+        String formatted = String.format(
+                "%s|%s|%s" +
+                "\n-----\n" +
+                "%s|%s|%s" +
+                "\n-----\n" +
+                "%s|%s|%s",
+                board.toArray()
+        );
+        printStream.println(formatted);
     }
 
-    public void makeMove(int boardPosition, String playerSymbol) {
+    public void mark(int boardPosition, String playerSymbol) {
         board.set(getIndexFromBoardPosition(boardPosition), playerSymbol);
     }
 

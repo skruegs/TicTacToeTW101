@@ -39,13 +39,13 @@ public class GameBoardTest {
 
     @Test
     public void shouldHaveXInSpotOneWhenFirstMoveIsOne() throws Exception {
-        gameBoard.makeMove(1, "X");
+        gameBoard.mark(1, "X");
         assertThat(board.get(0), is("X"));
     }
 
     @Test
     public void shouldHaveXInSpotTwoWhenFirstMoveIsTwo() throws Exception {
-        gameBoard.makeMove(2, "X");
+        gameBoard.mark(2, "X");
         assertThat(board.get(1), is("X"));
     }
 
