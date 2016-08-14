@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -56,4 +58,15 @@ public class PlayerTest {
         verify(gameBoard).mark(2, "X");
     }
 
+    @Test
+    public void shouldReturnTrueWhenPlayerHasWon() {
+        when(gameBoard.hasFullRow()).thenReturn(true);
+        assertTrue(player.hasWon());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenPlayerHasNotWon() {
+        when(gameBoard.hasFullRow()).thenReturn(false);
+        assertFalse(player.hasWon());
+    }
 }

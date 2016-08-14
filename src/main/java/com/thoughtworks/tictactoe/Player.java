@@ -26,6 +26,12 @@ public class Player {
         gameBoard.mark(mark, symbol);
     }
 
+    public boolean hasWon() {
+        return gameBoard.hasFullRow() ||
+               gameBoard.hasFullColumn() ||
+               gameBoard.hasFullDiagonal();
+    }
+
     private void promptPlayer() {
         printStream.println("Player " + playerNumber + ": Enter a number to place your mark.");
     }
@@ -49,6 +55,5 @@ public class Player {
         }
         return -1;
     }
-
 
 }

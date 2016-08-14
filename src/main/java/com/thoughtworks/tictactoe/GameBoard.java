@@ -46,7 +46,29 @@ public class GameBoard {
         return true;
     }
 
+    public boolean hasFullRow() {
+        return cellsHaveMatchingSymbol(0, 1, 2) ||
+               cellsHaveMatchingSymbol(3, 4, 5) ||
+               cellsHaveMatchingSymbol(6, 7, 8);
+    }
+
+    public boolean hasFullColumn() {
+        return cellsHaveMatchingSymbol(0, 3, 6) ||
+               cellsHaveMatchingSymbol(1, 4, 7) ||
+               cellsHaveMatchingSymbol(2, 5, 8);
+    }
+
+    public boolean hasFullDiagonal() {
+        return cellsHaveMatchingSymbol(0, 4, 8) ||
+               cellsHaveMatchingSymbol(2, 4, 6);
+    }
+
     private int getIndexFromBoardPosition(int move) {
         return move - 1;
     }
+
+    private boolean cellsHaveMatchingSymbol(int c1, int c2, int c3) {
+        return board.get(c1).equals(board.get(c2)) && board.get(c2).equals(board.get(c3));
+    }
+
 }

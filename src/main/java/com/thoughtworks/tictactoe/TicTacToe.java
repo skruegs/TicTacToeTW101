@@ -4,40 +4,49 @@ import java.io.PrintStream;
 
 public class TicTacToe {
 
-    private GameBoard gameBoard;
     private PrintStream printStream;
+    private GameBoard gameBoard;
     private final Player player1;
     private final Player player2;
     private Player currentPlayer;
 
-    public TicTacToe(GameBoard gameBoard, PrintStream printStream, Player player1, Player player2) {
-        this.gameBoard = gameBoard;
+    public TicTacToe(PrintStream printStream, GameBoard gameBoard, Player player1, Player player2) {
         this.printStream = printStream;
+        this.gameBoard = gameBoard;
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
     }
 
     public void startGame() {
-        gameBoard.display();
-
-        while(!gameBoard.isFull()) {
-            currentPlayer.executeMove();
+        while (!gameBoard.isFull()) {
             gameBoard.display();
-            switchCurrentPlayer();
+            currentPlayer.executeMove();
+            if (currentPlayer.hasWon()) {
+                break;
+            } else {
+                switchCurrentPlayer();
+            }
         }
-
-        printStream.print("Game is a draw.");
+        displayResult();
     }
 
     private void switchCurrentPlayer() {
         if (currentPlayer.equals(player1)) {
             currentPlayer = player2;
-        }
-        else {
+        } else {
             currentPlayer = player1;
         }
     }
 
+    private void displayResult() {
+        String result;
+        if (currentPlayer.hasWon()) {
+            result = "Player " + currentPlayer.playerNumber + " wins!";
+        } else {
+            result = "Game is a draw.";
+        }
+        printStream.println(result);
+    }
 
 }
