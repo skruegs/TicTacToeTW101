@@ -42,7 +42,7 @@ public class TicTacToe {
     private void displayResult() {
         String result;
         if (currentPlayer.hasWon()) {
-            result = "Player " + currentPlayer.playerNumber + " wins!";
+            result = "Player " + currentPlayer.getPlayerNumber() + " wins!";
         } else {
             result = "Game is a draw.";
         }

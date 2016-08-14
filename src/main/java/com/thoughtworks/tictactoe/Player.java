@@ -9,8 +9,8 @@ public class Player {
     private PrintStream printStream;
     private BufferedReader reader;
     private GameBoard gameBoard;
-    public final String playerNumber;
-    public final String symbol;
+    private final String playerNumber;
+    private final String symbol;
 
     public Player(PrintStream printStream, BufferedReader reader, GameBoard gameBoard, String playerNumber, String symbol) {
         this.printStream = printStream;
@@ -22,14 +22,18 @@ public class Player {
 
     public void executeMove() {
         promptPlayer();
-        int mark = getValidMove();
-        gameBoard.mark(mark, symbol);
+        int move = getValidMove();
+        gameBoard.mark(move, symbol);
     }
 
     public boolean hasWon() {
         return gameBoard.hasFullRow() ||
                gameBoard.hasFullColumn() ||
                gameBoard.hasFullDiagonal();
+    }
+
+    public String getPlayerNumber() {
+        return playerNumber;
     }
 
     private void promptPlayer() {
