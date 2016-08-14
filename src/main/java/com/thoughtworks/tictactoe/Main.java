@@ -17,8 +17,8 @@ public class Main {
         PrintStream printStream = System.out;
         GameBoard gameBoard = initializeGameBoard(printStream);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Player player1 = new Player(printStream, reader, gameBoard, "1", "X");
-        Player player2 = new Player(printStream, reader, gameBoard, "2", "O");
+        Player player1 = new HumanPlayer(printStream, reader, gameBoard, "1", "X");
+        Player player2 = new ComputerPlayer(printStream, reader, gameBoard, "2", "O");
         return new TicTacToe(printStream, gameBoard, player1, player2);
     }
 

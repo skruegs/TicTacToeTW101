@@ -6,8 +6,8 @@ public class TicTacToe {
 
     private PrintStream printStream;
     private GameBoard gameBoard;
-    private final Player player1;
-    private final Player player2;
+    private Player player1;
+    private Player player2;
     private Player currentPlayer;
 
     public TicTacToe(PrintStream printStream, GameBoard gameBoard, Player player1, Player player2) {
@@ -24,9 +24,8 @@ public class TicTacToe {
             currentPlayer.executeMove();
             if (currentPlayer.hasWon()) {
                 break;
-            } else {
-                switchCurrentPlayer();
             }
+            switchCurrentPlayer();
         }
         displayResult();
     }

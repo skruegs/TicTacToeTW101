@@ -14,19 +14,19 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class PlayerTest {
+public class HumanPlayerTest {
 
     private GameBoard gameBoard;
     private PrintStream printStream;
     private BufferedReader reader;
-    private Player player;
+    private HumanPlayer player;
 
     @Before
     public void setUp() {
         gameBoard = mock(GameBoard.class);
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        player = new Player(printStream, reader, gameBoard, "1", "X");
+        player = new HumanPlayer(printStream, reader, gameBoard, "1", "X");
     }
 
     @Test

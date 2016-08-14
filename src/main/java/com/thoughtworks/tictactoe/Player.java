@@ -4,13 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-public class Player {
+public abstract class Player {
 
-    private PrintStream printStream;
-    private BufferedReader reader;
-    private GameBoard gameBoard;
-    private final String playerNumber;
-    private final String symbol;
+    protected PrintStream printStream;
+    protected BufferedReader reader;
+    protected GameBoard gameBoard;
+    protected String playerNumber;
+    protected String symbol;
 
     public Player(PrintStream printStream, BufferedReader reader, GameBoard gameBoard, String playerNumber, String symbol) {
         this.printStream = printStream;
@@ -18,12 +18,6 @@ public class Player {
         this.gameBoard = gameBoard;
         this.playerNumber = playerNumber;
         this.symbol = symbol;
-    }
-
-    public void executeMove() {
-        promptPlayer();
-        int move = getValidMove();
-        gameBoard.mark(move, symbol);
     }
 
     public boolean hasWon() {
@@ -36,20 +30,11 @@ public class Player {
         return playerNumber;
     }
 
-    private void promptPlayer() {
+    protected void promptPlayer() {
         printStream.println("Player " + playerNumber + ": Enter a number to place your mark.");
     }
 
-    private int getValidMove() {
-        int mark = readNumber();
-        while (gameBoard.isPositionTaken(mark)) {
-            printStream.println("Location already taken. Try again.");
-            mark = readNumber();
-        }
-        return mark;
-    }
-
-    private int readNumber() {
+    protected int readNumber() {
         try {
             return Integer.parseInt(reader.readLine());
         } catch (IOException e) {
@@ -59,5 +44,7 @@ public class Player {
         }
         return -1;
     }
+
+    abstract void executeMove();
 
 }
